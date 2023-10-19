@@ -5,7 +5,7 @@ const headerInput = document.querySelector(".header-input");
 const todoList = document.querySelector(".todo-list");
 const todoCompleted = document.querySelector(".todo-completed");
 
-const todoData = [];
+let todoData = [];
 
 const render = function () {
   todoList.innerHTML = "";
@@ -26,8 +26,6 @@ const render = function () {
         '<button class="todo-complete"></button>' +
         "</div>";
 
-      console.log(li);
-
       if (item.completed) {
         todoCompleted.append(li);
       } else {
@@ -38,8 +36,16 @@ const render = function () {
         item.completed = !item.completed;
         render();
       });
+      li.querySelector(".todo-remove").addEventListener("click", function () {
+        li.remove();
+        clear();
+      });
     }
   });
+};
+
+const clear = function () {
+  todoData = [];
 };
 
 todoControl.addEventListener("submit", function (event) {
