@@ -16,8 +16,20 @@ const todoData = [
   },
 ];
 
+const render = function () {
+  console.log(todoData);
+};
+
 todoControl.addEventListener("submit", function (event) {
   event.preventDefault();
-});
 
-console.log("Hello, World!");
+  const newTodo = {
+    text: headerInput.value,
+    completed: false,
+  };
+
+  todoData.push(newTodo);
+  headerInput.value = "";
+
+  render();
+});
