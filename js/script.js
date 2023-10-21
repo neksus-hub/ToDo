@@ -6,6 +6,7 @@ const todoList = document.querySelector(".todo-list");
 const todoCompleted = document.querySelector(".todo-completed");
 
 let todoData = [];
+let newArr = [];
 
 const render = function () {
   todoList.innerHTML = "";
@@ -36,16 +37,27 @@ const render = function () {
         item.completed = !item.completed;
         render();
       });
+
       li.querySelector(".todo-remove").addEventListener("click", function () {
         li.remove();
         clear();
       });
+
+      localStorage.setItem("item", JSON.stringify(todoData));
     }
   });
 };
 
 const clear = function () {
   todoData = [];
+};
+
+const getCase = function () {
+  if (localStorage.item) {
+    todoData = JSON.parse(localStorage.getItem("item"));
+    console.log(todoData);
+    render();
+  }
 };
 
 todoControl.addEventListener("submit", function (event) {
@@ -61,3 +73,5 @@ todoControl.addEventListener("submit", function (event) {
 
   render();
 });
+
+getCase();
